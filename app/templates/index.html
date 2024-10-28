@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>User List</h1>
+<table>
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Creation Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td id="col1">{{ user.user_id }}</td>
+            <td id="col2">{{ user.user_name }}</td>
+            <td id="col3">{{ user.creation_date }}</td>
+            <td id="col4">
+                <a href="{{ url_for('rest.edit_user', user_id=user.user_id) }}">Edit</a>
+                <form action="{{ url_for('rest.delete_user', user_id=user.user_id) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('rest.add_user') }}">Add New User</a>
+{% endblock %}

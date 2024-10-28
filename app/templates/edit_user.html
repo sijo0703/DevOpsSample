@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ action }}</h1>
+<form method="post">
+    <p>
+        <label for="username">Username</label><br>
+        <input type="text" name="username" value="{{ user.user_name if user else '' }}" required>
+    </p>
+    <p>
+        <label for="creationdate">Creation Date</label><br>
+        <input type="date" name="creationdate" value="{{ user.creation_date if user else '' }}" required>
+    </p>
+    <p>
+        <input type="submit" value="Submit">
+    </p>
+</form>
+<a href="{{ url_for('web.index') }}">Back to User List</a>
+{% endblock %}
