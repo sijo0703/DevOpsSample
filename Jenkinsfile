@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Set up a virtual environment
-                    bat 'python3 -m venv venv'
+                    bat 'python -m venv venv'
                     // Activate virtual environment and install dependencies
                     bat '.\\venv\\Scripts\\activate && pip install -r requirements.txt'
                 }

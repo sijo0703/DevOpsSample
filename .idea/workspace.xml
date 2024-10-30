@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f29a2510-c40a-49b6-beea-ff62eceb70a6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clean_environment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/main/db_connector.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/main/db_connector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/rest/rest_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/rest/rest_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/web/web_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/web/web_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/function_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/function_testing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
