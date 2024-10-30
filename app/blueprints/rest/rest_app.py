@@ -1,3 +1,6 @@
+import os
+import signal
+
 from flask import Blueprint, render_template, request, redirect, url_for
 import pymysql
 from app.blueprints.main.db_connector import get_db_connection
@@ -69,5 +72,10 @@ def delete_user(user_id):
     finally:
         connection.close()
     return redirect(url_for('web.index'))
+
+@rest.route('/stop_server')
+def stop_server():
+    os.kill(os.getpid(),signal.CTRL_C_EVENT)
+    return 'Server Stopped'
 
 # use GET request to retrieve a user details based on the user_id provided if not display user not found

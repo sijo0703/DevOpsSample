@@ -1,3 +1,5 @@
+import os
+import signal
 from flask import Blueprint, render_template, request, redirect, url_for
 import pymysql
 import app.blueprints.main.db_connector
@@ -22,3 +24,8 @@ def index():
         return "Error fetching users", 500
     finally:
         connection.close()
+
+@web.route('/stop_server')
+def stop_server():
+    os.kill(os.getpid(),signal.CTRL_C_EVENT)
+    return 'Server Stopped'

@@ -5,29 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f29a2510-c40a-49b6-beea-ff62eceb70a6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/gdeProject1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/blueprints/main/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/blueprints/main/db_connector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/blueprints/rest/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/blueprints/rest/rest_app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/blueprints/web/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/blueprints/web/web_app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/add_user.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/edit_user.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/frontend_testing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/function_testing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clean_environment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/main/db_connector.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/main/db_connector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/rest/rest_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/rest/rest_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/web/web_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/web/web_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/function_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/function_testing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +32,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sijo0703&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sijo0703/GDEProject.git&quot;,
+    &quot;accountId&quot;: &quot;818bf923-ea77-4f1c-a258-b2668f9c3a50&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -58,11 +57,12 @@
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
     "Python tests.Python tests in function_testing.py.executor": "Run",
+    "Python.clean_environment.executor": "Run",
     "Python.frontend_testing.executor": "Run",
     "Python.run.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -72,7 +72,29 @@
       <recent name="C:\Users\sthomas05\PycharmProjects\gdeProject1\app\blueprints\rest" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run">
+  <component name="RunManager" selected="Python tests.Python tests in function_testing.py">
+    <configuration name="clean_environment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="gdeProject1" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/clean_environment.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="frontend_testing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gdeProject1" />
       <option name="ENV_FILES" value="" />
@@ -134,8 +156,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.run" />
         <item itemvalue="Python tests.Python tests in function_testing.py" />
+        <item itemvalue="Python.run" />
+        <item itemvalue="Python.clean_environment" />
         <item itemvalue="Python.frontend_testing" />
       </list>
     </recent_temporary>
@@ -157,5 +180,8 @@
       <updated>1728593712382</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
 </project>

@@ -1,4 +1,7 @@
+import os
+import signal
 import pymysql.cursors
+from . import main
 
 
 def get_db_connection():
@@ -33,3 +36,8 @@ def create_table():
         print(f"Error creating table: {e}")
     finally:
         connection.close()
+
+@main.route('/stop_server')
+def stop_server():
+    os.kill(os.getpid(),signal.CTRL_C_EVENT)
+    return 'Server Stopped'
