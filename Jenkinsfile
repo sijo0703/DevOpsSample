@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     // Wait for the Flask app to start
-                    bat 'timeout 5'
+                    //bat 'timeout 5'
 
                     // Run Selenium tests
                     bat '.\\venv\\Scripts\\activate && python -m unittest discover -s tests'
