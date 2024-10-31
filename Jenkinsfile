@@ -34,7 +34,6 @@ pipeline {
                     bat '''
                         .\\venv\\Scripts\\activate
                         start /b python run.py
-                        echo !> flask_pid.txt
                     '''
                 }
             }
@@ -58,8 +57,8 @@ pipeline {
             script {
                 // Stop Flask application after tests complete
                 bat '''
-                    for /f %%A in (flask_pid.txt) do taskkill /F /PID %%A
-                    del flask_pid.txt
+                       .\\venv\\Scripts\\activate
+                        start /b python clean_environment.py
                 '''
             }
         }
