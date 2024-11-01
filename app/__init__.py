@@ -7,6 +7,7 @@ from app.blueprints.main import main as main_blueprint
 from app.blueprints.rest import rest as rest_blueprint
 from app.blueprints.web import web as web_blueprint
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')

@@ -1,4 +1,4 @@
-# frontend_testing.py
+# test_01_frontend.py
 # webdriver_manager to automatically manage the ChromeDriver version, so you don’t have to manually download it.
 # You can change this to Firefox or another browser if needed.
 

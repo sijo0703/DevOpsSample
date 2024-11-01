@@ -1,6 +1,6 @@
 import unittest
 from app import create_app
-from tests.function_testing import TestUserManagement
+from tests.test_02_function import TestUserManagement
 
 app = create_app()
 
