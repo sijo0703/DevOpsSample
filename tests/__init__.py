@@ -1,1 +1,1 @@
-import test_01_frontend, test_02_function
+from . import test_01_frontend, test_02_function

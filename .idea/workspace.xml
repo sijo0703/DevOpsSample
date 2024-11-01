@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f29a2510-c40a-49b6-beea-ff62eceb70a6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_02_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_02_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +63,7 @@
       <recent name="C:\Users\sthomas05\PycharmProjects\gdeProject1\app\blueprints\rest" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests in test_02_function.py">
+  <component name="RunManager" selected="Python.run">
     <configuration name="clean_environment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gdeProject1" />
       <option name="ENV_FILES" value="" />
@@ -148,8 +147,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests in test_02_function.py" />
         <item itemvalue="Python.run" />
+        <item itemvalue="Python tests.Python tests in test_02_function.py" />
         <item itemvalue="Python.clean_environment" />
         <item itemvalue="Python.test_01_frontend" />
       </list>
