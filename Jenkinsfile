@@ -1,5 +1,6 @@
 pipeline {
-    agent any
+    //agent any
+    agent { node 'Jenkins-Agent'}
     //agent { label 'my-specific-agent' }
     //agent { node 'my-node-name' }
     environment {
