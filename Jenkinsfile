@@ -5,6 +5,7 @@ pipeline {
     //agent { node 'my-node-name' }
     environment {
         // Environment variables for Flask app
+        PYTHONHOME = "C:\\Users\\sthomas05\\AppData\\Local\\Programs\\Python\\Python312"
         // Specify the path to Chromedriver if necessary
         CHROMEDRIVER_PATH = "C:\\GDEDEV\\selenium\\chromedriver.exe"
         DB_HOST = "127.0.0.1"            // MySQL Docker container IP
