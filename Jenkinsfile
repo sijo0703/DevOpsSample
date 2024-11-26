@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the repository
-                git branch: 'main', url: 'https://github.com/sijo0703/GDEProject.git'
+                git branch: 'main', url: 'https://github.com/sijo0703/DevOpsSample.git'
             }
         }
 
