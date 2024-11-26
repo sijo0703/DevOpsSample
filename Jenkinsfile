@@ -1,5 +1,8 @@
 pipeline {
-    agent jenkins-agent-aws
+    //agent jenkins-agent-aws
+    agent {
+        label 'jenkins-agent-aws'
+    }
 
     environment {
         // Set Python virtual environment and other variables
