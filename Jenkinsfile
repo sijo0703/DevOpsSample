@@ -1,38 +1,33 @@
 pipeline {
-    //agent any
-    agent { node 'Jenkins-Agent'}
-    //agent { label 'my-specific-agent' }
-    //agent { node 'my-node-name' }
+    agent any
+
     environment {
-        // Environment variables for Flask app
-        PYTHONHOME = "C:\\Users\\sthomas05\\AppData\\Local\\Programs\\Python\\Python312"
-        // Specify the path to Chromedriver if necessary
-        CHROMEDRIVER_PATH = "C:\\GDEDEV\\selenium\\chromedriver.exe"
-        DB_HOST = "127.0.0.1"            // MySQL Docker container IP
-        DB_PORT = "3306"                 // MySQL Docker container port
-        DB_USER = "sijo"                 // MySQL username
-        DB_PASSWORD = "password"    // MySQL password
-        DB_NAME = "gdeproj1"               // MySQL database name
+        // Set Python virtual environment and other variables
+        VENV_DIR = "venv"
+        SELENIUM_DRIVER_PATH = "/usr/bin/chromedriver" // Adjust as needed
+        DB_HOST = "127.0.0.1"           // MySQL Docker container IP
+        DB_PORT = "3306"                // MySQL Docker container port
+        DB_USER = "sijo"                // MySQL username
+        DB_PASSWORD = "password"        // MySQL password
+        DB_NAME = "gdeproj1"            // MySQL database name
     }
-    // A Jenkinsfile is composed of one or more stages, each representing a distinct phase in the pipeline.
-    // Stages are executed sequentially.
+
     stages {
         stage('Checkout') {
-            //  Within each stage, define one or more steps using the steps block.
             steps {
                 // Clone the repository
-                git 'https://github.com/sijo0703/GDEProject.git'
+                git branch: 'main', url: 'https://github.com/sijo0703/GDEProject.git'
             }
         }
 
         stage('Setup Python Environment') {
             steps {
-                script {
-                    // Set up a virtual environment
-                    bat 'python -m venv venv'
-                    // Activate virtual environment and install dependencies
-                    bat '.\\venv\\Scripts\\activate && pip install -r requirements.txt'
-                }
+                // Install dependencies
+                sh '''
+                python3 -m venv ${VENV_DIR}
+                source ${VENV_DIR}/bin/activate
+                pip install -r requirements.txt
+                '''
             }
         }
 
@@ -40,7 +35,7 @@ pipeline {
             steps {
                 script {
                     // Wait for the MySQL Docker container to be ready
-                    bat '''
+                    sh '''
                         for /l %%x in (1, 1, 30) do (
                             echo Checking if MySQL is ready...
                             mysql -h %DB_HOST% -P %DB_PORT% -u %DB_USER% -p%DB_PASSWORD% -e "SELECT 1" && exit /b 0
@@ -52,44 +47,44 @@ pipeline {
             }
         }
 
-        stage('Run Flask Application') {
+        stage('Start Flask App') {
             steps {
-                script {
-                    // Run Flask app in the background using start /b on Windows or nohup on Linux
-                    bat '''
-                        .\\venv\\Scripts\\activate
-                        start /b python run.py
-                    '''
-                }
+                // Start the Flask app in the background
+                sh '''
+                source ${VENV_DIR}/bin/activate
+                FLASK_APP=run.py flask run --host=0.0.0.0 --port=5000 &
+                echo $! > flask_pid.txt
+                '''
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Selenium Tests') {
             steps {
-                script {
-                    // Wait for the Flask app to start
-                    //bat 'timeout 5'
+                // Wait for the Flask app to start
+                sh 'timeout 5'
+                // Run Selenium tests
+                sh '''
+                source ${VENV_DIR}/bin/activate
+                pytest tests/selenium --driver=${SELENIUM_DRIVER_PATH}
+                '''
+            }
+        }
 
-                    // Run Selenium tests
-                    bat '.\\venv\\Scripts\\activate && python -m unittest discover -s tests'
-                }
+        stage('Teardown') {
+            steps {
+                // Kill the Flask app
+                sh '''
+                kill $(cat flask_pid.txt)
+                rm flask_pid.txt
+                '''
             }
         }
     }
 
     post {
         always {
-            script {
-                // Stop Flask application after tests complete
-                bat '''
-                       .\\venv\\Scripts\\activate
-                        start /b python clean_environment.py
-                '''
-            }
-        }
-        cleanup {
-            // Clean up virtual environment after build
-            bat 'rmdir /s /q venv'
+            // Cleanup the workspace
+            deleteDir()
         }
     }
 }
