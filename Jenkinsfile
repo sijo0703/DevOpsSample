@@ -68,7 +68,7 @@ pipeline {
                 // Run Selenium tests
                 sh '''
                 source ${VENV_DIR}/bin/activate
-                pytest tests/selenium --driver=${SELENIUM_DRIVER_PATH}
+                pytest tests/ --driver=${SELENIUM_DRIVER_PATH}
                 '''
             }
         }
