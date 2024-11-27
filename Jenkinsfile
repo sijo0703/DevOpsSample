@@ -27,9 +27,11 @@ pipeline {
             steps {
                 // Install dependencies
                 sh '''
-                sudo apt install python3.12-venv
+                sudo apt update
+                sudo apt install -y python3.12-venv
                 python3 -m venv ${VENV_DIR}
                 source ${VENV_DIR}/bin/activate
+                pip install --upgrade pip
                 pip install -r requirements.txt
                 '''
             }
