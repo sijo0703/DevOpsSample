@@ -44,7 +44,7 @@ pipeline {
                     cd mysql
 
                     # Run the MySQL Docker container
-                    docker run --name mysql \
+                    sudo docker run --name mysql \
                           -v $(pwd):/var/lib/mysql \
                           -e MYSQL_ROOT_PASSWORD=mysql \
                           -e MYSQL_DATABASE=${DB_NAME} \
