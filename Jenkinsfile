@@ -39,16 +39,22 @@ pipeline {
                 script {
                     // Wait for the MySQL Docker container to be ready
                     sh '''
-                        for /l %%x in (1, 1, 30) do (
-                            echo Checking if MySQL is ready...
-                            mysql -h %DB_HOST% -P %DB_PORT% -u %DB_USER% -p%DB_PASSWORD% -e "SELECT 1" && exit /b 0
-                            timeout /t 5
-                        )
-                        exit /b 1
+                        for i in {1..30}; do
+                            echo "Checking if MySQL is ready (attempt $i)..."
+                                if mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWORD" -e "SELECT 1" > /dev/null 2>&1; then
+                                    echo "MySQL is ready!"
+                                    exit 0
+                                fi
+                            echo "MySQL is not ready. Retrying in 5 seconds..."
+                            sleep 5
+                        done
+                        echo "MySQL did not become ready in time."
+                        exit 1
                     '''
                 }
             }
         }
+
 
         stage('Start Flask App') {
             steps {
