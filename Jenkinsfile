@@ -39,17 +39,31 @@ pipeline {
                 script {
                     // Wait for the MySQL Docker container to be ready
                     sh '''
-                        for i in {1..30}; do
-                            echo "Checking if MySQL is ready (attempt $i)..."
-                                if mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWORD" -e "SELECT 1" > /dev/null 2>&1; then
-                                    echo "MySQL is ready!"
-                                    exit 0
-                                fi
-                            echo "MySQL is not ready. Retrying in 5 seconds..."
-                            sleep 5
-                        done
-                        echo "MySQL did not become ready in time."
-                        exit 1
+                    # Create a directory for MySQL data
+                    mkdir -p mysql
+                    cd mysql
+
+                    # Run the MySQL Docker container
+                    docker run --name mysql \
+                          -v $(pwd):/var/lib/mysql \
+                          -e MYSQL_ROOT_PASSWORD=mysql \
+                          -e MYSQL_DATABASE=${DB_NAME} \
+                          -e MYSQL_USER=${DB_USER} \
+                          -e MYSQL_PASSWORD=${DB_PASSWORD} \
+                          -p 3306:3306 \
+                          -d mysql:8.0.33
+
+                    for i in {1..30}; do
+                        echo "Checking if MySQL is ready (attempt $i)..."
+                        if mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWORD" -e "SELECT 1" > /dev/null 2>&1; then
+                            echo "MySQL is ready!"
+                            exit 0
+                        fi
+                        echo "MySQL is not ready. Retrying in 5 seconds..."
+                        sleep 5
+                    done
+                    echo "MySQL did not become ready in time."
+                    exit 1
                     '''
                 }
             }
