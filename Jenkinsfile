@@ -117,10 +117,10 @@ pipeline {
             }
         }
 
-
-        post {
-            always {
-                sh '''
+    }
+    post {
+        always {
+            sh '''
                     # Stop and remove the MySQL container if it exists
                     sudo docker stop ${MYSQL_CONTAINER_NAME} || true
                     sudo docker rm ${MYSQL_CONTAINER_NAME} || true
@@ -130,7 +130,7 @@ pipeline {
                 '''
                 // Cleanup the workspace using the Jenkins directive
                 deleteDir()
-            }
         }
     }
+
 }
