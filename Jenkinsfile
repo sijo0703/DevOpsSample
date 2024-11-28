@@ -7,12 +7,13 @@ pipeline {
     environment {
         // Set Python virtual environment and other variables
         VENV_DIR = "venv"
-        SELENIUM_DRIVER_PATH = "/usr/bin/chromedriver" // Adjust as needed
+        MYSQL_CONTAINER_NAME = 'mysql' //docker container name
         DB_HOST = "127.0.0.1"           // MySQL Docker container IP
         DB_PORT = "3306"                // MySQL Docker container port
         DB_USER = "sijo"                // MySQL username
         DB_PASSWORD = "password"        // MySQL password
         DB_NAME = "gdeproj1"            // MySQL database name
+        SELENIUM_DRIVER_PATH = "/usr/bin/chromedriver" // Adjust as needed
     }
 
     stages {
@@ -44,7 +45,7 @@ pipeline {
                     cd mysql
 
                     # Run the MySQL Docker container
-                    sudo docker run --name mysql \
+                    sudo docker run --name ${MYSQL_CONTAINER_NAME} \
                           -v $(pwd):/var/lib/mysql \
                           -e MYSQL_ROOT_PASSWORD=mysql \
                           -e MYSQL_DATABASE=${DB_NAME} \
@@ -52,23 +53,36 @@ pipeline {
                           -e MYSQL_PASSWORD=${DB_PASSWORD} \
                           -p 3306:3306 \
                           -d mysql:8.0.33
-
-                    for i in {1..30}; do
-                        echo "Checking if MySQL is ready (attempt $i)..."
-                        if mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWORD" -e "SELECT 1" > /dev/null 2>&1; then
-                            echo "MySQL is ready!"
-                            exit 0
-                        fi
-                        echo "MySQL is not ready. Retrying in 5 seconds..."
-                        sleep 5
-                    done
-                    echo "MySQL did not become ready in time."
-                    exit 1
+                    echo "Created docker container for mysql."
                     '''
                 }
             }
         }
 
+        stage('Wait for MySQL to Be Ready') {
+            steps {
+                script {
+                    sh '''
+                        echo "Waiting for MySQL container to be ready..."
+                        timeout=30
+                        count=0
+                        while [ $count -lt $timeout ]; do
+                            # Check if the container is healthy
+                            if [ "$(sudo docker inspect -f '{{.State.Health.Status}}' ${MYSQL_CONTAINER_NAME})" == "healthy" ]; then
+                                echo "MySQL container is healthy and ready!"
+                                exit 0
+                            fi
+                            echo "MySQL is not ready yet. Retrying in 5 seconds..."
+                            count=$((count + 5))
+                            sleep 5
+                        done
+                        echo "MySQL container did not become ready in time."
+                        exit 1
+                    '''
+                }
+            }
+        }
+    }
 
         stage('Start Flask App') {
             steps {
@@ -106,7 +120,15 @@ pipeline {
 
     post {
         always {
-            // Cleanup the workspace
+            sh '''
+                    # Stop and remove the MySQL container if it exists
+                    sudo docker stop ${MYSQL_CONTAINER_NAME} || true
+                    sudo docker rm ${MYSQL_CONTAINER_NAME} || true
+
+                    # Remove the mysql directory
+                    # rm -rf mysql || true
+                '''
+            // Cleanup the workspace using the Jenkins directive
             deleteDir()
         }
     }
