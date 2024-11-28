@@ -82,7 +82,7 @@ pipeline {
                 }
             }
         }
-    }
+
 
         stage('Start Flask App') {
             steps {
@@ -116,7 +116,7 @@ pipeline {
                 '''
             }
         }
-    }
+
 
     post {
         always {
