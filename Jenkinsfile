@@ -132,7 +132,7 @@ pipeline {
                 // Cleanup the workspace using the Jenkins directive
                 deleteDir()
                 }
-                //cleanWs()
+                cleanWs()
 
         }
     }
