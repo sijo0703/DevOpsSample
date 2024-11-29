@@ -68,8 +68,8 @@ pipeline {
                         count=0
                         while [ $count -lt $timeout ]; do
                             # Check if the container is healthy
-                            if [ "$(sudo docker inspect -f '{{.State.Health.Status}}' ${MYSQL_CONTAINER_NAME})" == "healthy" ]; then
-                                echo "MySQL container is healthy and ready!"
+                            if [ "$(sudo docker inspect -f '{{.State.Status}}' ${MYSQL_CONTAINER_NAME})" == "running" ]; then
+                                echo "MySQL container is running and ready!"
                                 exit 0
                             fi
                             echo "MySQL is not ready yet. Retrying in 5 seconds..."
@@ -120,7 +120,8 @@ pipeline {
     }
     post {
         always {
-            sh '''
+            script {
+                sh '''
                     # Stop and remove the MySQL container if it exists
                     sudo docker stop ${MYSQL_CONTAINER_NAME} || true
                     sudo docker rm ${MYSQL_CONTAINER_NAME} || true
@@ -130,6 +131,9 @@ pipeline {
                 '''
                 // Cleanup the workspace using the Jenkins directive
                 deleteDir()
+                }
+                //cleanWs()
+
         }
     }
 
