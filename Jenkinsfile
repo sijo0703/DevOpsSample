@@ -128,6 +128,7 @@ pipeline {
 
                     # Remove the mysql directory
                     # rm -rf mysql || true
+                    rm -rf *
                 '''
                 // Cleanup the workspace using the Jenkins directive
                 deleteDir()
