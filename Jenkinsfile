@@ -101,8 +101,12 @@ pipeline {
                 sh 'sleep 5'
                 // Run Selenium tests
                 sh '''
+                sudo apt update
+                sudo apt install -y google-chrome-stable
+                sudo apt install -y chromedriver
                 source ${VENV_DIR}/bin/activate
-                pytest tests/ --driver=${SELENIUM_DRIVER_PATH}
+                pip install pytest pytest-selenium
+                pytest tests/ --driver Chrome --driver-path=${SELENIUM_DRIVER_PATH}
                 '''
             }
         }
