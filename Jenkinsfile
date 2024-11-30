@@ -103,8 +103,6 @@ pipeline {
                 // Run Selenium tests
                 sh '''
                 sudo apt update
-                sudo add-apt-repository 'deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main'
-                sudo apt install -y google-chrome-stable
                 sudo apt install -y chromedriver
                 source ${VENV_DIR}/bin/activate
                 pip install pytest pytest-selenium
