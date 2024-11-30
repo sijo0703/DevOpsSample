@@ -89,7 +89,8 @@ pipeline {
                 // Start the Flask app in the background
                 sh '''
                 source ${VENV_DIR}/bin/activate
-                FLASK_APP=run.py flask run --host=0.0.0.0 --port=5000 &
+                nohup python run.py --host=0.0.0.0 --port=5000 > flask.log 2>&1 &
+                # FLASK_APP=run.py flask run --host=0.0.0.0 --port=5000 &
                 echo $! > flask_pid.txt
                 '''
             }
@@ -102,6 +103,7 @@ pipeline {
                 // Run Selenium tests
                 sh '''
                 sudo apt update
+                sudo add-apt-repository 'deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main'
                 sudo apt install -y google-chrome-stable
                 sudo apt install -y chromedriver
                 source ${VENV_DIR}/bin/activate
