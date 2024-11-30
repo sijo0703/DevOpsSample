@@ -98,7 +98,7 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 // Wait for the Flask app to start
-                sh 'timeout 5'
+                sh 'sleep 5'
                 // Run Selenium tests
                 sh '''
                 source ${VENV_DIR}/bin/activate
