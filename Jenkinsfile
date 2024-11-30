@@ -97,12 +97,12 @@ pipeline {
 
         stage('Run Selenium Tests') {
             steps {
-                // Wait for the Flask app to start
-                sh 'timeout 5'
+                // Allow time for the Flask app to initialize
+                sh 'sleep 5'
                 // Run Selenium tests
                 sh '''
                 source ${VENV_DIR}/bin/activate
-                pytest tests/ --driver=${SELENIUM_DRIVER_PATH}
+                pytest tests/ --driver Chrome --driver-path=${SELENIUM_DRIVER_PATH}
                 '''
             }
         }
